@@ -35,7 +35,7 @@
 
     <modules>
         <module>shared/tcr-pom.xml</module>
-        <module>clients/go</module>
+<!--        <module>clients/go</module>-->
         <module>clients/java</module>
         <module>clients/js</module>
         <module>clients/py</module>        

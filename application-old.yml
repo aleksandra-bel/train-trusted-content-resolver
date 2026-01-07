@@ -1,0 +1,92 @@
+management:
+  endpoint:
+    configprops:
+      show-values: ALWAYS
+    env:
+      show-values: ALWAYS
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: "*" #health, info, metrics, prometheus
+  otlp:
+    collector:
+      url: #http://localhost:4318/v1
+    metrics:
+      export:
+        enabled: false
+        url: ${management.otlp.collector.url}/metrics
+        step: 10s
+    tracing:
+      endpoint: ${management.otlp.collector.url}/traces
+      export:
+        step: 10s # Export interval set to 10 seconds
+  tracing:
+    enabled: false
+    sampling:
+      probability: 1.0
+
+server:
+  port: '${TRAIN_TSPA_SERVER_PORT:8087}'
+  tomcat:
+    mbeanregistry:
+      enabled: true
+    threads:
+      max: 200
+      min-spare: 20
+  shutdown: graceful
+
+spring:
+  application:
+    name: trusted-content-resolver
+  cloud:
+    kubernetes:
+      config: 
+        enabled: true
+        name: trusted-content-resolver
+#        namespace: trusted-content-resolver 
+#        sources:
+#          - name: trusted-content-resolver 
+      reload:
+        enabled: true        
+  mvc:
+    log-request-details: true
+
+springdoc:
+  api-docs:
+    path: /api/docs
+    enabled: true
+
+logging:
+  level:
+    root: INFO
+    eu.xfsc.train.tcr: DEBUG
+    org.springframework.web: INFO
+#    org.xbill.DNS: DEBUG
+#    uniresolver: DEBUG
+    
+tcr:
+  did:
+#    base-uri: local #http://localhost:8080/1.0
+    base-uri: https://dev.uniresolver.io/1.0
+    config-path: ../uni-resolver-config.json
+    cache:
+      size: 0
+      timeout: 1H
+  dns:
+    hosts: #1.1.1.1, 8.8.8.8, 8.8.4.4
+#    hosts: https://dns.google/dns-query
+#      - 1.1.1.1 doesn't work this way
+#      - 8.8.8.8
+#      - 8.8.4.4
+    timeout: 500
+    doh:
+      enabled: false
+    dnssec:
+      enabled: true  #DANE..
+      rootPath:
+  tl:
+    cache:
+      size: 0
+      timeout: 1H
