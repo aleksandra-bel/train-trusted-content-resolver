@@ -192,6 +192,7 @@
             <dependency>
                 <groupId>decentralized-identity</groupId>
                 <artifactId>did-common-java</artifactId>
+                <!-- Use updated library to solve No consumer for application/did issue: https://github.com/aleksandra-bel/did-common-java/tree/fix/1.11-fix-application-did -->
                 <version>${did.version}</version>
             </dependency>
             <dependency>
