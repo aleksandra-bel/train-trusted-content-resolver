@@ -1,20 +1,14 @@
-# Stage 1: Maven-Build
-FROM maven:3.9.6-eclipse-temurin-21 AS builder
+FROM eclipse-temurin:21-jre
 
-WORKDIR /build
+# Install native crypto dependency
+RUN apt-get update \
+ && apt-get install -y libsodium23 \
+ && rm -rf /var/lib/apt/lists/*
 
-# Nur pom.xml kopieren und Dependencies cachen
-COPY pom.xml .
-RUN mvn dependency:go-offline
+WORKDIR /app
+COPY target/*.jar app.jar
 
-# Restliche Projektdateien kopieren und bauen
-COPY . .
-RUN mvn clean package -DskipTests
+EXPOSE 8087
+ENTRYPOINT ["java", "-jar", "app.jar"]
 
-# Stage 2: Runtime
-FROM bellsoft/liberica-openjdk-alpine:21
 
-# Copy das gebaute JAR aus dem Builder-Stage
-COPY --from=builder /build/target/trusted-content-resolver-service-*.jar /trusted-content-resolver-service.jar
-
-ENTRYPOINT ["java", "-jar", "/trusted-content-resolver-service.jar"]
