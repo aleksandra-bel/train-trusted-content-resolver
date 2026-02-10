@@ -40,16 +40,16 @@ server:
 spring:
   application:
     name: trusted-content-resolver
-  cloud:
-    kubernetes:
-      config:
-        enabled: true
-        name: trusted-content-resolver
-      #        namespace: trusted-content-resolver
-      #        sources:
-      #          - name: trusted-content-resolver
-      reload:
-        enabled: true
+#  cloud:
+#    kubernetes:
+#      config:
+#        enabled: true
+#        name: trusted-content-resolver
+#      #        namespace: trusted-content-resolver
+#      #        sources:
+#      #          - name: trusted-content-resolver
+#      reload:
+#        enabled: true
   mvc:
     log-request-details: true
 
@@ -84,7 +84,7 @@ tcr:
     doh:
       enabled: false
     dnssec:
-      enabled: true  #DANE..
+      enabled: false  #DANE..
       rootPath:
   tl:
     cache:
