@@ -40,6 +40,7 @@
         <module>clients/js</module>
         <module>clients/py</module>        
         <module>service</module>
+        <module>did-common-java</module>
     </modules>
 
     <properties>
@@ -189,12 +190,12 @@
                 <artifactId>key-formats-java</artifactId>
                 <version>${key-format.version}</version>
             </dependency>
-            <dependency>
-                <groupId>decentralized-identity</groupId>
-                <artifactId>did-common-java</artifactId>
-                <!-- Use updated library to solve No consumer for application/did issue: https://github.com/aleksandra-bel/did-common-java/tree/fix/1.11-fix-application-did -->
-                <version>1.11.0-local</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>decentralized-identity</groupId>-->
+<!--                <artifactId>did-common-java</artifactId>-->
+<!--                &lt;!&ndash; Use updated library to solve No consumer for application/did issue: https://github.com/aleksandra-bel/did-common-java/tree/fix/1.11-fix-application-did &ndash;&gt;-->
+<!--                <version>1.11.0-local</version>-->
+<!--            </dependency>-->
             <dependency>
 	            <groupId>decentralized-identity</groupId>
 	            <artifactId>uni-resolver-client</artifactId>

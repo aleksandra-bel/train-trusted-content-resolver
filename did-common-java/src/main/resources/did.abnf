@@ -1,0 +1,22 @@
+did-url = did path-abempty [ "?" query ] [ "#" fragment ]
+
+did                = "did:" method-name ":" method-specific-id
+method-name        = 1*method-char
+method-char        = %x61-7A / DIGIT
+method-specific-id = *( *idchar ":" ) 1*idchar
+idchar             = ALPHA / DIGIT / "." / "-" / "_" / pct-encoded
+pct-encoded        = "%" HEXDIG HEXDIG
+
+path-abempty = *( "/" segment )
+segment = *pchar
+pchar = unreserved / pct-encoded / sub-delims / ":" / "@"
+query = *( pchar / "/" / "?" )
+fragment = *( pchar / "/" / "?" )
+unreserved = ALPHA / DIGIT / "-" / "." / "_" / "~"
+reserved = gen-delims / sub-delims
+gen-delims = ":" / "/" / "?" / "#" / "[" / "]" / "@"
+sub-delims = "!" / "$" / "&" / "'" / "(" / ")" / "*" / "+" / "," / ";" / "="
+
+ALPHA =  %x41-5A / %x61-7A
+DIGIT =  %x30-39
+HEXDIG =  DIGIT / "A" / "B" / "C" / "D" / "E" / "F"
